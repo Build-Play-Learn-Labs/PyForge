@@ -1,2 +1,2 @@
 # PyForge
-A version of Code Wisp but in python
+A version of Code Wisp but for python
