@@ -3,7 +3,7 @@ Local Pyodide assets
 Place the contents of the Pyodide distribution here so the app can load
 Pyodide without using a CDN.
 
-Tested version: v0.24.1 (full)
+Tested version: v0.29.0 (full)
 
 How to populate:
 - Download the archive for v0.24.1 (full build) from the official releases.

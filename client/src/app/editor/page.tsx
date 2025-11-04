@@ -33,6 +33,10 @@ export default function EditorPage() {
     setOutput((prev) => (prev ? prev + "\n" + s : s));
   };
 
+  const clearOutput = () => {
+    setOutput("");
+  };
+
   useEffect(() => {
     let cancelled = false;
     (async () => {
@@ -47,6 +51,8 @@ export default function EditorPage() {
           stderr: (s: string) => appendOut(s),
         });
         if (cancelled) return;
+        appendOut("Loading micropip…");
+        await py.loadPackage("micropip");
         pyodideRef.current = py;
         setPyReady(true);
         appendOut("Pyodide ready.");
@@ -101,6 +107,12 @@ export default function EditorPage() {
           >
             {pyReady ? "Run" : "Loading Pyodide…"}
           </button>
+          <button
+            className="rounded border border-white/10 px-3 py-1.5 text-white hover:border-white/30"
+            onClick={clearOutput}
+          >
+            Clear
+          </button>
           <Link href="/" className="hover:text-zinc-200">
             Home
           </Link>
@@ -137,7 +149,7 @@ export default function EditorPage() {
             />
           </div>
           <div className="px-4 py-2 text-xs uppercase tracking-wide text-zinc-400 border-t border-white/10">Output</div>
-          <div className="px-4 py-3 font-mono text-sm bg-zinc-900/60 overflow-auto flex-1">
+          <div className="px-4 py-3 font-mono text-sm bg-zinc-900/60 overflow-auto flex-1 whitespace-pre-wrap">
             {output || "Output will appear here."}
           </div>
         </div>
